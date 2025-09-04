@@ -6,8 +6,8 @@
 
 //-xdc-mainnet 
 //export const contractNFTAddress="0x513c2E0F8533b8Ff350e3f52a780aDd2D5434B1e";
-//-xdc-mainnet 
-export const contractNFTAddress="0xc2e6370CDce542de3713dD4b7c2da9f2228c703d";
+//Educhain Mainet
+export const contractNFTAddress="0xEf71f006F89f0C83F4EC0886E4d9a80df878Bdda";
 
 export const abiNFT = [
 	{
