@@ -15,7 +15,7 @@ const CvById: React.FC<CvByIdProps> = ({ cvData }) => {
             CV <strong>{i + 1}</strong>
           </h1>
           <a
-            href={`https://tru-cv-lisk.vercel.app/cv/${doc}`}
+            href={`https://educhain-tru-cv.vercel.app/cv/${doc}`}
             className="border border-slate-400 text-[#006666] py-2 px-4 rounded-md hover:text-yellow-700 text-center"
           >
             View CV
