@@ -2,10 +2,9 @@ import { CvFormDataType } from "@/forms/CvForm";
 import { API_BASE_URL } from "@/main";
 import { Cv_resoponse_type } from "@/types";
 import { useMutation, useQuery } from "react-query";
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 
 export const useCV = () => {
-  const navigate = useNavigate();
 
   const createCV = async (
     formData: CvFormDataType
@@ -45,7 +44,7 @@ export const useCV = () => {
     onSuccess: (data) => {
       if (data && data._id) {
         const { _id: id } = data;
-        navigate(`/cv/${id}`);
+        window.location.href = `/cv/${id}`
       }
     },
   });
