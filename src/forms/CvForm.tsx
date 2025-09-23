@@ -502,7 +502,7 @@ const CvForm = () => {
     try {
       setTxStarted(true);
       const arr = localStorage.getItem("hashArray");
-      const hashArray = arr ? JSON.parse(arr) : ["bafkreicojn2jmuymgcccwqznmntyyvendd47jwccvtnqpwaung6mvkrrta"];
+      const hashArray = arr ? JSON.parse(arr) : ["9729b91ef18c6c0c65296825ab10e20ae4ed48d1e01d13803d2ab2600bb5db16_1758629279.json"];
 
       console.log("hashArray", hashArray);
       const contractNFT = await getNFTContract();
