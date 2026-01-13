@@ -56,12 +56,12 @@ const DashBoard = () => {
      const fetchIds = async()=>{
       const id=toast.loading("document fetching...")
       try{
-        const loginMailId= localStorage.getItem("email");
+        const loginMailId= localStorage.getItem("userMailId");
         const response = await fetch(`${API_BASE_URL}/cv/getCvIds/${loginMailId}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            "Authorization":`Bearer ${localStorage.getItem("googleIdToken")}`
+            "Authorization":`Bearer ${localStorage.getItem("token")}`
           },
         });
         const data = await response.json();
@@ -69,10 +69,10 @@ const DashBoard = () => {
         if(!data.success)
         {
           toast.dismiss(id);
-          if(data.message==="Invalid token")
-          {
-            window.location.href="/invalid-token"
-          }
+          // if(data.message==="Invalid token")
+          // {
+          //   window.location.href="/invalid-token"
+          // }
           return toast.error(data.message ||"No CV found")
         }
         setCvData(data?.userData.nanoIds);

@@ -48,17 +48,17 @@ const CvForm = () => {
     const nanoId = nanoid(16);
     const storedNanoId = localStorage.getItem("nanoId");
     if (!storedNanoId) {
-      const username = localStorage.getItem("userProfileName");
-      if (!username) {
+      //const username = localStorage.getItem("userProfileName");
+      // if (!username) {
 
-        window.location.href = "/login";
-      }
-      const firstName = username?.split(" ")[0];
-      const lastName = username?.split(" ")[2]
-        ? username?.split(" ")[2]
-        : username?.split(" ")[1] || "CV";
-      const idWithName = `${firstName}-${lastName}-${nanoId}`;
-      localStorage.setItem("nanoId", idWithName);
+      //   window.location.href = "/login";
+      // }
+      // const firstName = username?.split(" ")[0];
+      // const lastName = username?.split(" ")[2]
+      //   ? username?.split(" ")[2]
+      //   : username?.split(" ")[1] || "CV";
+      // const idWithName = `${firstName}-${lastName}-${nanoId}`;
+      localStorage.setItem("nanoId", nanoId);
     }
     //const paymentId = localStorage.getItem("paymentId");
     // const checkStatus = async () => {
@@ -453,7 +453,7 @@ const CvForm = () => {
       }
     } else if (step === 6) {
       const nanoId = localStorage.getItem("nanoId") ?? "12345678";
-      const loginMailId = localStorage.getItem("email") ?? "ajeet@gmail.com";
+      const loginMailId = localStorage.getItem("userMailId") ?? "ajeet@gmail.com";
       //const userName= sessionStorage.getItem("userName"); // Use a fallback string
       console.log("Form is getting submitted now");
       console.log(currentFormData);
@@ -708,7 +708,7 @@ const CvForm = () => {
                       <div className="flex justify-center items-center w-auto sm:w-full">
                         <a
                           className="w-full px-2 py-1 text-center items-center border rounded hover:bg-[#f8f9fa] font-semibold hover:opacity-90"
-                          href={`https://educhain.blockscout.com/tx/${txHash || localStorage.getItem("txHash")}`}
+                          href={`https://mantlescan.xyz/tx/${txHash || localStorage.getItem("txHash")}`}
                           target="_blank"
                           rel="noopener noreferrer"
                         >

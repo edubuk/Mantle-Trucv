@@ -1,39 +1,45 @@
 import { API_BASE_URL } from "@/main";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import VerifyOtp from "./VerifyOtp";
 
-export default function Login() {
+export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const handleLogin = async (e: React.FormEvent) => {
+  const [loading, setLoading] = useState(false);
+  const [otpSent, setOtpSent] = useState(false);
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
 
-    const res = await fetch(`${API_BASE_URL}/auth/login`, {
+    const res = await fetch(`${API_BASE_URL}/auth/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
     });
 
     const data = await res.json();
-    console.log("data",data)
+    setLoading(false);
+
     if (res.ok) {
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("userMailId", email);
-      toast.success("Login successful");
-      window.location.href = "/";
+      // store email temporarily for OTP verification
+      localStorage.setItem("otpEmail", email);
+      setOtpSent(true);
+      toast.success("OTP sent to your email");
     } else {
-      toast.error(data.message || "Login failed");
+      toast.error(data.message || "Registration failed");
     }
   };
 
   return (
+    <>
+    {!otpSent?
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <form
-        onSubmit={handleLogin}
+        onSubmit={handleSubmit}
         className="bg-white p-6 rounded shadow-md w-96"
       >
-        <h2 className="text-2xl font-bold mb-4">Login</h2>
+        <h2 className="text-2xl font-bold mb-4">Register</h2>
 
         <input
           type="email"
@@ -53,13 +59,20 @@ export default function Login() {
           required
         />
 
-        <button className="w-full bg-blue-600 text-white py-2 rounded">
-          Login
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full bg-blue-600 text-white py-2 rounded"
+        >
+          {loading ? "Sending OTP..." : "Register"}
         </button>
-        <p className="text-center mt-4">
-          Don't have an account? <a href="/register" className="text-blue-600">Register</a>
+         <p className="text-center mt-4">
+          Already have an account? <a href="/login" className="text-blue-600">Login</a>
         </p>
       </form>
-    </div>
+    </div>:
+    <VerifyOtp email={email} password={password}/>
+      }
+    </>
   );
 }

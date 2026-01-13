@@ -17,6 +17,8 @@ const CancellationPolicy = lazy(() => import("./pages/CancellationPol"));
 const ContactUs = lazy(() => import("./pages/ContactUs"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
+const Register = lazy(() => import("./pages/Registration"));
+
 import AOS from "aos";
 import "aos/dist/aos.css";
 import AppPrivacyPolicy from "./pages/AppPrivacy";
@@ -45,11 +47,8 @@ function App() {
     const handlerLogout = () => {
       try {
               googleLogout();    // Perform Google OAuth logout and remove stored token  
-              localStorage.removeItem("googleIdToken");
-              localStorage.removeItem("email");
-              localStorage.removeItem("userName");
-              localStorage.removeItem("userImage");
-              localStorage.removeItem("tokenExpiry");
+              localStorage.removeItem("token");
+              localStorage.removeItem("userMailId");
               window.location.href="/";
               return { result: "Logout success" };
           } catch (error) {
@@ -79,6 +78,7 @@ function App() {
               <Route path="/pprivacy-policy" element={<AppPrivacyPolicy />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/login" element={<GoogleLoginModal />} />
+              <Route path="/register" element={<Register />} />
               <Route path="/cv/:id" element={<CvOutputPage />} />
               <Route path="/admin" element={<AdminUsersPage/>} />
               <Route path="/subscription" element={<ProtectedRoute><SubscriptionPlans /></ProtectedRoute>} />

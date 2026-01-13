@@ -6,10 +6,11 @@
 
 //-xdc-mainnet 
 //export const contractNFTAddress="0x513c2E0F8533b8Ff350e3f52a780aDd2D5434B1e";
-//Educhain Mainet
-export const contractNFTAddress="0xEf71f006F89f0C83F4EC0886E4d9a80df878Bdda";
+// mantle mainnet
+export const contractNFTAddress="0x9c473c9FcbA5D0aB2DbECdBaD8430936c8d8B293";
 
-export const abiNFT = [
+export const abiNFT = 
+[
 	{
 		"inputs": [
 			{

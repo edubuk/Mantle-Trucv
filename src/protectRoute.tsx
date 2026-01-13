@@ -3,8 +3,8 @@ import { Navigate } from "react-router-dom";
 
 
 const ProtectedRoute = ({children}:{children:React.ReactNode}) => {
-  const user = localStorage.getItem("googleIdToken");
-  return (user?<>{children}</>:<Navigate to="/login"/>
+  const token = localStorage.getItem("token");
+  return (token?<>{children}</>:<Navigate to="/login"/>
   );
 };
 

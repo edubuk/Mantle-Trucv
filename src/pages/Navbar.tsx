@@ -212,7 +212,7 @@ console.log("currentPath",currentPath);
                 {link.name}
               </Link>
             ) : (
-              localStorage.getItem("googleIdToken") && (
+              localStorage.getItem("token") && (
                 <Link
                   key={i + 1}
                   to={link.path}
@@ -230,7 +230,7 @@ console.log("currentPath",currentPath);
           )}
           
         </div>
-        {!localStorage.getItem("googleIdToken") ? (
+        {!localStorage.getItem("token") ? (
             <div className="hidden lg:flex relative rounded-full p-[2px] bg-gradient-to-r from-[#03257e] via-[#006666] to-[#f14419]">
               <Link
                 to="/login"
@@ -319,7 +319,7 @@ const Sidebar: React.FC<SidebarProps> = ({
               {link.name}
             </Link>
           ) : (
-            localStorage.getItem("googleIdToken") && (
+            localStorage.getItem("token") && (
               <Link
                 key={i + 1}
                 to={link.path}
@@ -333,7 +333,7 @@ const Sidebar: React.FC<SidebarProps> = ({
             )
           )
         )}
-        {!localStorage.getItem("googleIdToken") ? (
+        {!localStorage.getItem("token") ? (
           <Link
             to="/login"
             className="bg-[#03257e] py-2 px-4 rounded-full text-center text-white"
