@@ -1,14 +1,17 @@
 import { API_BASE_URL } from "@/main";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 export default function VerifyOtp({ email, password }: { email: string; password: string }) {
   const navigate = useNavigate();
   const [otp, setOtp] = useState("");
+  const [loading,setLoading]=useState(false);
 
   const handleVerify = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    try {
+    setLoading(true);
     const res = await fetch(`${API_BASE_URL}/auth/verify-otp`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -23,6 +26,10 @@ export default function VerifyOtp({ email, password }: { email: string; password
       navigate("/login");
     } else {
       alert(data.message || "Invalid OTP");
+    }} catch (error) {
+      toast.error("something went wrong");
+    }finally{
+      setLoading(false);
     }
   };
 
@@ -47,8 +54,11 @@ export default function VerifyOtp({ email, password }: { email: string; password
           required
         />
 
-        <button className="w-full bg-green-600 text-white py-2 rounded">
-          Verify OTP
+        <button 
+        className="w-full bg-green-600 text-white py-2 rounded"
+        disabled={loading}
+        >
+          {loading?"verifying...":"Verify OTP"}
         </button>
       </form>
     </div>

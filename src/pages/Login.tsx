@@ -5,10 +5,12 @@ import toast from "react-hot-toast";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading,setLoading]=useState(false);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-
+   try {
+    setLoading(true);
     const res = await fetch(`${API_BASE_URL}/auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -25,6 +27,11 @@ export default function Login() {
     } else {
       toast.error(data.message || "Login failed");
     }
+    } catch (error) {
+       toast.error("something went wrong");
+   }finally{
+    setLoading(false)
+   }
   };
 
   return (
@@ -53,8 +60,11 @@ export default function Login() {
           required
         />
 
-        <button className="w-full bg-blue-600 text-white py-2 rounded">
-          Login
+        <button 
+        className="w-full bg-blue-600 text-white py-2 rounded"
+        disabled={loading}
+        >
+          {loading?"Logging in...":"Login"}
         </button>
         <p className="text-center mt-4">
           Don't have an account? <a href="/register" className="text-blue-600">Register</a>
